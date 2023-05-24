@@ -6,7 +6,11 @@
 
 ### Game Running
 
-![Game Running](https://github.com/tukarp/Java-Breakout/blob/main/Images/Game%20Running.png)
+![Game Running 1](https://github.com/tukarp/Java-Breakout/blob/main/Images/Game%20Running%201.png)
+
+![Game Running 2](https://github.com/tukarp/Java-Breakout/blob/main/Images/Game%20Running%202.png)
+
+![Game Running 3](https://github.com/tukarp/Java-Breakout/blob/main/Images/Game%20Running%203.png)
 
 ### Game Won
 
