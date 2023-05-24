@@ -7,6 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.geometry.Point2D;
 import java.util.ArrayList;
 import javafx.scene.Scene;
+import java.util.Random;
 import java.util.List;
 
 
@@ -228,16 +229,25 @@ public class GameCanvas extends Canvas {
     public void loadLevel() {
         // Set bricks to new ArrayList
         bricks = new ArrayList<>();
+        // Set grid for rows and columns
+        Brick.setGridRowsAndColumns(50,10);
         // Create colors array
-        Color[] colors = new Color[]{Color.RED, Color.BEIGE, Color.BROWN, Color.GREENYELLOW, Color.BLUE};
-        // Set grid rows and columns
-        Brick.setGridRowsAndColumns(20,10);
+        Color[] colors = new Color[] {
+                Color.BLUE, Color.GREEN, Color.YELLOW, Color.PURPLE, Color.PINK,
+                Color.ORANGE, Color.BROWN, Color.BLACK, Color.WHITE, Color.GRAY,
+                Color.GOLD, Color.SILVER, Color.BLUE, Color.SKYBLUE, Color.LIMEGREEN,
+                Color.TEAL, Color.INDIGO, Color.MAGENTA, Color.VIOLET, Color.KHAKI,
+                Color.SALMON, Color.CRIMSON, Color.LAVENDER, Color.PLUM, Color.BLUEVIOLET,
+                Color.OLIVE, Color.CYAN, Color.MAROON, Color.BEIGE
+        };
         // For each row
-        for(int i = 0; i < 5; i++) {
+        for(int i = 0; i < 20; i++) {
+            // Create colorIndex variable and set it to random number in range of colors array length
+            int colorIndex = (int) ((Math.random() * (colors.length - 1)));
             // For each column
             for(int j = 0; j < Brick.getGridColumns(); j++)
                 // Add new Brick object to bricks
-                bricks.add(new Brick(j, i + 2, colors[i]));
+                bricks.add(new Brick(j, i + 2, colors[colorIndex]));
         }
     }
 }
