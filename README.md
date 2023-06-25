@@ -2,7 +2,7 @@
 
 ## About
 
-### This repository contains my *Java* implementation of classic arcade game, *Breakout*. This project was primarily developed during my *Object Oriented Programming* classes in 2022, with subsequent updates, code changes and finalization completed by me. I later updated this project to feature *Random Brick Colors*
+### This repository contains my *Java* implementation of classic arcade game, *Breakout*. This project was primarily developed during my *Object Oriented Programming* classes in 2022, with subsequent updates, code changes and finalization completed by me. I later updated this project to feature *Random Brick Colors*.
 
 ## Gameplay
 
