@@ -10,18 +10,18 @@ public abstract class GraphicsItem {
     protected static double canvasHeight;  // Create canvasHeight variable
     protected double width;                // Create width variable
     protected double height;               // Create height variable
-    protected double x;                    // Create x variable
-    protected double y;                    // Create y variable
+    protected double x;                    // Create x coordinate variable
+    protected double y;                    // Create y coordinate variable
 
     // Create getX method
     public double getX() {
-        // Return x
+        // Return x coordinate
         return x;
     }
 
     // Create getY method
     public double getY() {
-        // Return y
+        // Return y coordinate
         return y;
     }
 
@@ -39,9 +39,9 @@ public abstract class GraphicsItem {
 
     // Create setCanvasSize method
     public static void setCanvasSize(double canvasWidth, double canvasHeight) {
-        // Set canvasWidth and canvasHeight
-        GraphicsItem.canvasWidth = canvasWidth;
-        GraphicsItem.canvasHeight = canvasHeight;
+        // Set canvas width and height
+        GraphicsItem.canvasWidth = canvasWidth;    // Set canvas width
+        GraphicsItem.canvasHeight = canvasHeight;  // Set canvas height
     }
 
     // Create draw method

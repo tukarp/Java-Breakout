@@ -18,12 +18,12 @@ public class Brick extends GraphicsItem {
         this.color = color;
 
         // Set width and height of brick
-        width = canvasWidth / gridColumns;
-        height = canvasHeight / gridRows;
+        width = (canvasWidth / gridColumns);  // Set brick width
+        height = (canvasHeight / gridRows);   // Set brick height
 
-        // Set x and y coordinates of brick
-        x = gridX * width;
-        y = gridY * height;
+        // Set coordinates of brick
+        x = (gridX * width);   // Set x brick coordinate
+        y = (gridY * height);  // Set y brick coordinate
     }
 
     // Create enum CrushType
@@ -41,24 +41,24 @@ public class Brick extends GraphicsItem {
         return gridColumns;
     }
 
-    // Create setGridRows method
+    // Create setGridRowsAndColumns method
     public static void setGridRowsAndColumns(int gridRows, int gridColumns) {
-        // Set gridRows and gridColumns
-        Brick.gridRows = gridRows;
-        Brick.gridColumns = gridColumns;
+        // Set brick rows and columns grid
+        Brick.gridRows = gridRows;        // Set brick gridRows
+        Brick.gridColumns = gridColumns;  // Set brick gridColumns
     }
 
-    // Create draw method
+    // Override draw method
     @Override
     public void draw(GraphicsContext graphicsContext) {
         graphicsContext.setFill(color);  // Set color of brick
         graphicsContext.fillRect(x, y, width, height);  // Fill brick with color for given coordinates
         graphicsContext.setStroke(color.brighter());    // Set color of stroke
-        graphicsContext.strokeLine(x, y, x + width, y);     // Draw line for given coordinates
-        graphicsContext.strokeLine(x, y, x, y + height);    // Draw line for given coordinates
+        graphicsContext.strokeLine(x, y, (x + width), y);     // Draw line for given coordinates
+        graphicsContext.strokeLine(x, y, x, (y + height));    // Draw line for given coordinates
         graphicsContext.setStroke(color.darker());  // Set color of stroke
-        graphicsContext.strokeLine(x, y + height, x + width, y + height);   // Draw line for given coordinates
-        graphicsContext.strokeLine(x + width, y, x + width, y + height);     // Draw line for given coordinates
+        graphicsContext.strokeLine(x, (y + height), (x + width), (y + height));  // Draw line for given coordinates
+        graphicsContext.strokeLine((x + width), y, (x + width), (y + height));   // Draw line for given coordinates
     }
 
     // Create crushes method
@@ -74,6 +74,6 @@ public class Brick extends GraphicsItem {
     // Create contains method
     boolean contains(Point2D point) {
         // Return true if point is within brick
-        return x <= point.getX() && point.getX() <= x + width && y <= point.getY() && point.getY() <= y + height;
+        return ((x <= point.getX()) && (point.getX() <= x + width) && (y <= point.getY()) && (point.getY() <= y + height));
     }
 }

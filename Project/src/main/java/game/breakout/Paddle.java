@@ -8,13 +8,13 @@ import javafx.scene.paint.Color;
 public class Paddle extends GraphicsItem {
     // Create constructor
     public Paddle() {
-        // Set width and height of paddle
-        height = canvasHeight *.02;
-        width = canvasWidth * 0.2;
+        // Set width and height of the paddle
+        width = (canvasWidth * 0.2);   // Set paddle width
+        height = (canvasHeight *.02);  // Set paddle height
 
-        // Set x and y position of paddle
-        y = canvasHeight * .9;
-        x = (canvasWidth - width) / 2;
+        // Set x and y coordinates of the paddle
+        x = (canvasWidth - width / 2);  // Set paddle x coordinate
+        y = (canvasHeight * .9);        // Set paddle y coordinate
     }
 
     // Override draw method
@@ -29,7 +29,7 @@ public class Paddle extends GraphicsItem {
     // Create setPosition method
     void setPosition(double x) {
         // Set x position of paddle
-        this.x = clamp(x - width / 2, 0, canvasWidth - width);
+        this.x = clamp((x - width / 2), 0, (canvasWidth - width));
     }
 
     // Create clamp method
@@ -41,6 +41,6 @@ public class Paddle extends GraphicsItem {
     // Create getPosition method
     public double getPosition() {
         // Return x position of paddle
-        return x + width / 2;
+        return (x + width / 2);
     }
 }

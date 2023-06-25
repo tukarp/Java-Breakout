@@ -15,10 +15,10 @@ import java.util.List;
 public class GameCanvas extends Canvas {
     // Create class attributes
     // Graphics
-    private final GraphicsContext graphicsContext = this.getGraphicsContext2D();  // GraphicsContext object
-    private final GraphicsContext gameStatusText = this.getGraphicsContext2D();   // GameStatusText object
-    private final GraphicsContext scoreText = this.getGraphicsContext2D();        // ScoreText object
-    private final Scene scene;  // Scene object
+    private final GraphicsContext graphicsContext = this.getGraphicsContext2D();    // GraphicsContext object
+    private final GraphicsContext gameStatusText = this.getGraphicsContext2D();     // GameStatusText object
+    private final GraphicsContext scoreText = this.getGraphicsContext2D();          // ScoreText object
+    private final Scene scene;                                                      // Scene object
 
     // Game objects
     private List<Brick> bricks;     // List of Brick objects
@@ -27,20 +27,20 @@ public class GameCanvas extends Canvas {
     private int score = 0;          // Score variable
 
     // Game statuses
-    private Boolean gameRunning = false;  // Game running boolean
-    private enum gameStatusEnum {Running, Won, Lost}  // GameStatusEnum enum
-    private gameStatusEnum gameStatus = gameStatusEnum.Running;  // GameStatus variable
+    private Boolean gameRunning = false;                            // Game running boolean
+    private enum gameStatusEnum {Running, Won, Lost}                // GameStatusEnum enum
+    private gameStatusEnum gameStatus = gameStatusEnum.Running;     // GameStatus variable
 
     // Create constructor
     private final AnimationTimer animationTimer= new AnimationTimer() {
         // Create lastUpdate variable
         private long lastUpdate;
 
-        // Create handle method
+        // Override handle method
         @Override
         public void handle(long now) {
             // Create diff variable and set it to the difference between now and lastUpdate
-            double difference = (now - lastUpdate) / 1000000000.0;
+            double difference = ((now - lastUpdate) / 1000000000.0);
             // Update ball position
             ball.updatePosition(difference);
             // Draw game objects
@@ -75,6 +75,7 @@ public class GameCanvas extends Canvas {
                     if(crushType == Brick.CrushType.HorizontalCrush)
                         // Bounce ball horizontally
                         ball.bounceVertically();
+                    // Otherwise
                     else
                         // Bounce ball vertically
                         ball.bounceHorizontally();
@@ -131,51 +132,45 @@ public class GameCanvas extends Canvas {
 
     // Create getGameStatus method
     public void getGameStatus() {
-        // If ball is out of bounds
+        // Check if ball is out of bounds
         if(ball.getY() > getHeight()) {
+            // Set game status to game lost
             gameStatus = gameStatusEnum.Lost;
-            // If there are no bricks left
+        // Check if there are no bricks left
         } else if(bricks.isEmpty()) {
+            // Set game status to game won
             gameStatus = gameStatusEnum.Won;
-            // Else return "Running"
         }
     }
 
     // Create draw method
     public void draw() {
+        // Check if game status is running
         if(gameStatus.equals(gameStatusEnum.Running)) {
             // Get game status
             getGameStatus();
         }
 
         // Canvas
-        // Fill canvas with black color
-        graphicsContext.setFill(Color.BLACK);
-        // Fill canvas with color for given coordinates
-        graphicsContext.fillRect(0, 0, getWidth(), getHeight());
+        graphicsContext.setFill(Color.BLACK);  // Fill canvas with black color
+        graphicsContext.fillRect(0, 0, getWidth(), getHeight());  // Fill canvas with color for given coordinates
 
         // Score text
-        // Fill score text with white color
-        scoreText.setFill(Color.WHITE);
-        // Set score text font
-        scoreText.setFont(javafx.scene.text.Font.font(20));
-        // Draw score text
-        scoreText.fillText("Score: " + score, 10, 20);
+        scoreText.setFill(Color.WHITE);  // Fill score text with white color
+        scoreText.setFont(javafx.scene.text.Font.font(20));  // Set score text font
+        scoreText.fillText("Score: " + score, 10, 20);  // Draw score text
 
         // Game objects
-        // Draw paddle
-        paddle.draw(graphicsContext);
-        // Draw ball
-        ball.draw(graphicsContext);
-        // Draw bricks
-        bricks.forEach(brick -> brick.draw(graphicsContext));
-        // Draw game status
-        drawGameStatus(gameStatus.toString());
+        paddle.draw(graphicsContext);  // Draw paddle
+        ball.draw(graphicsContext);  // Draw ball
+        bricks.forEach(brick -> brick.draw(graphicsContext));  // Draw bricks
+        drawGameStatus(gameStatus.toString());  // Draw game status
     }
 
     // Create getGameStatus method
     public void drawGameStatus(String gameStatus) {
         // Draw game status text
+        // Check if player lost
         if(gameStatus.equals("Lost")) {
             // Load "You lost!" text
             // Fill game status text with white color
@@ -184,6 +179,7 @@ public class GameCanvas extends Canvas {
             gameStatusText.setFont(javafx.scene.text.Font.font(60));
             // Draw game status text
             gameStatusText.fillText("You lost!", 200, 400);
+        // Check if player won
         } else if(gameStatus.equals("Won")) {
             // Load "You won!" text
             // Fill game status text with white color
@@ -207,22 +203,31 @@ public class GameCanvas extends Canvas {
 
     // Create shouldBallBounceHorizontally method
     private boolean shouldBallBounceHorizontally() {
-        // Return true if ball matches conditions
+        // Return true if ball lastY coordinate is greater than 0 and y coordinate is lesser or equal to 0
         return ball.lastY > 0 && ball.y <= 0;
     }
 
     // Create shouldBallBounceFromPaddle method
     private boolean shouldBallBounceFromPaddle() {
-        // Return true if ball matches conditions
-        return ball.lastY + ball.height < paddle.y && ball.y + ball.height >= paddle.y
-                && ball.x >= paddle.x && ball.x <= paddle.x + paddle.width;
+        // Return true if
+        // ((Ball lastY coordinate + ball height is lesser than paddle y coordinate) and
+        // (Ball y coordinate + ball height is greater or equal to paddle y coordinate) and
+        // (Ball x coordinate is lesser or equal to paddle x coordinate + paddle width)) and
+        // (Ball x coordinate is greater or equal to paddle x coordinate)
+        return ((ball.lastY + ball.height < paddle.y) && (ball.y + ball.height >= paddle.y) &&
+               (ball.x <= paddle.x + paddle.width) && (ball.x >= paddle.x));
     }
 
     // Create shouldBallBounceVertically method
     private boolean shouldBallBounceVertically() {
-        // Return true if ball matches conditions
-        return  (ball.x <= 0 && ball.lastX > 0)
-                || (ball.x + ball.width >= getWidth() - 1 && ball.lastX + ball.width < getWidth() - 1);
+        // Return true if
+        // (((Ball x coordinate is lesser or equal to 0) and
+        // (Ball last x coordinate is greater than 0))
+        // Or
+        // ((Ball x coordinate + ball width is greater or equal to width - 1) and
+        // (Ball last x coordinate + ball width is lesser than width - 1)))
+        return  (((ball.x <= 0) && (ball.lastX > 0)) ||
+                ((ball.x + ball.width >= getWidth() - 1) && (ball.lastX + ball.width < getWidth() - 1)));
     }
 
     // Create loadLevel method
@@ -230,7 +235,7 @@ public class GameCanvas extends Canvas {
         // Set bricks to new ArrayList
         bricks = new ArrayList<>();
         // Set grid for rows and columns
-        Brick.setGridRowsAndColumns(50,10);
+        Brick.setGridRowsAndColumns(50, 10);
         // Create colors array
         Color[] colors = new Color[] {
                 Color.BLUE, Color.GREEN, Color.YELLOW, Color.PURPLE, Color.PINK,
@@ -247,7 +252,7 @@ public class GameCanvas extends Canvas {
             // For each column
             for(int j = 0; j < Brick.getGridColumns(); j++)
                 // Add new Brick object to bricks
-                bricks.add(new Brick(j, i + 2, colors[colorIndex]));
+                bricks.add(new Brick(j, (i + 2), colors[colorIndex]));
         }
     }
 }
