@@ -4,7 +4,7 @@
 
 ## Gameplay
 
-https://github.com/tukarp/Java-Breakout/assets/114019481/edba1c01-19ad-4f2a-be40-f2fd820caf92
+https://github.com/tukarp/Java-Breakout/assets/114019481/824af729-ed34-452d-9339-9ea275a66b1c
 
 ### Requirements
 
